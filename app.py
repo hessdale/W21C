@@ -47,7 +47,7 @@ def login():
 @app.post('/api/post')
 def new_post():
     try:
-        error = dbhelper.check_endpoint_info([request.json.get("content")],["content","token"])
+        error = dbhelper.check_endpoint_info(request.json,["content","token"])
         if(error != None):
             return make_response(jsonify(error),400)
         results = dbhelper.run_procedure('call new_post(?,?)',[request.json.get("content"),request.json.get("token")])
